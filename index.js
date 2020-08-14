@@ -1,19 +1,22 @@
 function updateMap(){
-    fetch("data.json")
+    fetch("https://www.trackcorona.live/api/countries")
     .then(response => response.json())
     .then(rsp => {
         // console.log(rsp.data)
         rsp.data.forEach(element => {
             latitude = element.latitude;
             longitude = element.longitude;
-            cases = element.infected;
+            cases = element.confirmed;
 
-            if (cases > 255){
-                color = `rgb(255, 0, 0)`;
+            if (cases > 1000000){
+                color = `red`;
             }
+	    else if (cases > 100000){
+		color = 'yellow'
+	    }
 
             else{
-                color = `rgb(${cases}, 0, 0)`;
+                color = `green`;
             }
 
             // Mark on the map
